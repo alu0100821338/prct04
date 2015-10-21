@@ -17,3 +17,329 @@ y salidas (resaltando la sintaxis), además, cuenta con una arquitectura flexibl
 y permite la invocación en tiempo de ejecución y la navegación por el código fuente.
  Mientras que el irb no dispone de resaltado en la sintaxis, aunque si te permite ver
  lo que aparece en el código fuente. 
+
+
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+
+
+
+48. ¿Que diferencia hay entre "\t\n" y '\t\n'?
+>> "\t\n"
+ => "\t\n"
+>> '\t\n'
+ => "\\t\\n"
+El interprete al encontrarse comillas dobles, inspecciona dentro para ver si hay 
+alguna variable que interpolar. Si solo usamos comillas simples no se preocupa de ello 
+y lo coge todo como un string.
+
+
+ 49. ¿Como funciona %q? ¿Que es %q{hello world\n}? ¿Que es %q{’a’ ’b’ ’c’}? El %q hace 
+que se evalue lo que esta entre llaves como si estuviera entre comillas simples, y además 
+el resultado lo muestra entre comillas dobles. 
+hello world\\n 
+"'a' 'b' 'c'" 
+
+
+50. ¿Como funciona %Q? ¿Que es %Q{hello world\n}? ¿Que es %Q{"a" "b" "c"}?
+El %Q hace que se evalue lo que esta entre llaves como si estuviera entre comillas 
+dobles, y ademas el resultado lo muestra entre comillas dobles.
+
+51. ¿Que queda en c? "--4--\n--2--\n"
+
+52. ¿Que queda en c?
+"--\#{a}--\n--\#{b}--\n"
+
+53. s = "hello". ¿Cual es el valor de las siguientes expresiones?
+>> s[0,2]
+ => "he"
+>> s[-1,1]
+ => "o"
+>> s[0,10]
+ => "hello"
+
+
+54. ¿Que queda en g?
+ => "hello world"
+
+
+55. ¿Que queda en e?
+>> "..."
+
+
+56. ¿Cual es el resultado?
+ => "2 2 2 "
+
+57. ¿Que es esto? %w[this is a test] Crea una serie de elementos como un array, a 
+partir de los elementos separados por espacios, separandolos por comas .
+
+
+58. ¿Que es esto? %w[\t \n]
+ => ["\\t", "\\n"] Hace lo explicado en el apartado anterior y no se evalua lo que hay 
+dentro de los corchetes
+
+
+59. ¿Que es esto? %W[\t \n]
+ => ["\t", "\n"]  separa por comas lo que aparece separado por espacios y evalua 
+el contenido tambien, acuando como comillas dobles
+
+
+60. ¿Que contiene nils? nils = Array.new(3) => [nil, nil, nil] Contiene tres nil
+
+
+61. ¿Que contiene zeros? zeros = Array.new(3, 0)
+ => [0, 0, 0] Contiene tres 0
+
+
+62. ¿Que queda en b? => [[1, 2], [3, 4]] Se crea un array con el contenido de x;
+
+
+63. ¿Que queda en c?
+=> [0, 2, 4] 
+
+64. ¿Cual es el resultado de cada una de estas operaciones?
+>> a = ('a'..'e').to_a
+ => ["a", "b", "c", "d", "e"]
+>>  a[1,1]
+ => ["b"]
+>> a[-2,2]
+ => ["d", "e"]
+>> a[0..2]
+ => ["a", "b", "c"]
+>> a[0...1]
+ => ["a"]
+>>  a[-2..-1]
+ => ["d", "e"]
+
+
+65. ¿Cual es el resultado de cada una de estas operaciones?
+>> a
+ => ["a", "b", "c", "d", "e"]
+>>  a[0,2] = %w{A B}
+ => ["A", "B"]
+>> a
+ => ["A", "B", "c", "d", "e"]
+>>  a[2..5] = %w{C D E}
+ => ["C", "D", "E"]
+>> a
+ => ["A", "B", "C", "D", "E"]
+>> a[0,0] = [1,2,3]
+ => [1, 2, 3]
+>> a
+ => [1, 2, 3, "A", "B", "C", "D", "E"]
+>> a[0,2] = []
+ => []
+>> a
+ => [3, "A", "B", "C", "D", "E"]
+>>  a[-1,1] = [ 'Z' ]
+ => ["Z"]
+>> a
+ => [3, "A", "B", "C", "D", "Z"]
+>> a[-2,2] = nil
+ => nil
+>> a
+ => [3, "A", "B", "C", nil]
+
+
+66. ¿Cual es el resultado de cada una de estas operaciones?
+>> a = (1...4).to_a
+ => [1, 2, 3]
+>> a = a + [4, 5]
+ => [1, 2, 3, 4, 5]
+>> a += [[6, 7, 8]]
+ => [1, 2, 3, 4, 5, [6, 7, 8]]
+>> a = a + 9
+TypeError: no implicit conversion of Fixnum into Array
+        from (irb):90:in `+'
+        from (irb):90
+        from /usr/local/rvm/rubies/ruby-2.2.2/bin/irb:11:in `<main>'
+
+
+
+67. ¿Cual es el resultado de cada una de estas operaciones?
+>> x = %w{a b c b a}
+ => ["a", "b", "c", "b", "a"]
+>> x = x - %w{b c d}
+ => ["a", "a"] 
+
+
+68. ¿Cual es el resultado de cada una de estas operaciones?
+ => [0, 0, 0, 0, 0, 0, 0, 0]
+
+
+69. ¿Cual es el resultado de cada una de estas operaciones?
+>> a = []
+ => []
+>> a << 1
+ => [1]
+>> a << 2 << 3
+ => [1, 2, 3]
+>> a << [4, 5, 6]
+ => [1, 2, 3, [4, 5, 6]]
+>> a.concat [7, 8]
+ => [1, 2, 3, [4, 5, 6], 7, 8]
+
+
+70. ¿Cual es el resultado de cada una de estas operaciones?
+>> a = [1, 1, 2, 2, 3, 3, 4]
+ => [1, 1, 2, 2, 3, 3, 4]
+>> b = [5, 5, 4, 4, 3, 3, 2]
+ => [5, 5, 4, 4, 3, 3, 2]
+>> c = a | b
+ => [1, 2, 3, 4, 5]
+>> d = b | a
+ => [5, 4, 3, 2, 1]
+>> e = a & b
+ => [2, 3, 4]
+>> f = b & a
+ => [4, 3, 2] 
+
+
+71. ¿Que resultados dan las siguientes operaciones?
+>>   a = 1..10
+ => 1..10
+>> a.class
+ => Range
+>> a.to_a
+ => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+>>  b = 1...10
+ => 1...10
+>> b.to_a
+ => [1, 2, 3, 4, 5, 6, 7, 8, 9]
+>> b.include? 10
+ => false
+>> b.include? 8
+ => true
+>> b.step(2) {|x| print "#{x} " }
+1 3 5 7 9 => 1...10
+>>  1..3.to_a
+NoMethodError: undefined method `to_a' for 3:Fixnum
+        from (irb):35
+        from /usr/local/rvm/rubies/ruby-2.2.2/bin/irb:11:in `<main>'
+
+
+72. ¿Que resultados dan las siguientes operaciones?
+>>   r = 0...100
+ => 0...100
+>> r.member? 50
+ => true
+>> r.include? 99.9
+ => true
+>> r.member? 99.9
+ => true
+
+
+73. ¿Que resultados dan las siguientes operaciones?
+>> true.class
+ => TrueClass
+>> false.class
+ => FalseClass
+>> puts "hello" if 0
+hello
+ => nil
+>> puts "hello" if nil
+ => nil
+>> puts "hello" if ""
+(irb):70: warning: string literal in condition hello
+ => nil 73. ¿Que resultados dan las siguientes operaciones?
+>> true.class
+ => TrueClass
+>> false.class
+ => FalseClass
+>> puts "hello" if 0
+hello
+ => nil
+>> puts "hello" if nil
+ => nil
+>> puts "hello" if ""
+(irb):70: warning: string literal in condition hello
+ => nil 
+
+
+
+74. ¿Que resultados dan las siguientes operaciones?
+>> x = :sym
+ => :sym
+>> x.class
+ => Symbol
+>> x == 'sym'
+ => false
+>> x == :sym
+ => true
+>> z = :'a long symbol'
+ => :"a long symbol"
+>> z.class
+ => Symbol
+>> x == 'sym'.to_sym
+ => true
+>> x.to_s == 'sym'
+ => true
+
+
+75. ¿Que resultados se dan?
+>> s = "Ruby"
+ => "Ruby"
+>> t = s
+ => "Ruby"
+>> t[-1] = ""
+ => ""
+>> print s
+Rub => nil
+>> t = "Java"
+ => "Java"
+>> print s, t
+RubJava => nil 
+
+
+
+76. ¿Cual es el resultado?
+>>   "%d %s" % [3, "rubies"]
+ => "3 rubies" 
+
+77. ¿Cuales son los resultados?
+>>   x, y = 4, 5
+ => [4, 5]
+>> z = x > y ? x : y
+ => 5
+>>  x,y,z = [1,2,3]
+ => [1, 2, 3] 
+
+
+78. ¿Que resultados dan las siguientes operaciones?
+>>   x = { :a => 1, :b => 2 }
+ => {:a=>1, :b=>2}
+>> x.keys
+ => [:a, :b]
+>> x.values
+ => [1, 2]
+>> x[:c] = 3
+ => 3
+>> x
+ => {:a=>1, :b=>2, :c=>3}
+>> x.delete('a')
+ => nil
+>> x
+ => {:a=>1, :b=>2, :c=>3}
+>> x.delete(:a)
+ => 1
+>> x
+ => {:b=>2, :c=>3}
+>> x = { :a => 1, :b => 2, :c => 4 }
+ => {:a=>1, :b=>2, :c=>4}
+>> x.delete_if { |k,v| v % 2 == 0 }
+ => {:a=>1}
+>> x
+ => {:a=>1} 
+
+
+
+79. ¿Que hace la siguiente sentencia? counts = Hash.new(0) ¿Que diferencia hay con la 
+asignacion counts = {}? El primero cuenta las veces que se repite en un array cada 
+elemento que está insertado, se inicializa en la clase Hash, es decir, en una 
+determinada tabla hash, mientras que al counts= {}, simplemente se está inicializando 
+un contador vacío.
+
+
+80. ¿Que retorna esta expresion regular?
+ >>   'hello world, hello LPP'.scan /\w+/
+ => ["hello", "world", "hello", "LPP"] 
