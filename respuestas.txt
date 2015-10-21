@@ -1,0 +1,3 @@
+27. ¿Qué es rvm?
+	Es una herramienta de línea de comandos que permite instalar facilmente,
+ gestionar y trabajar con múltiples entornos de intérpretes Ruby. 
